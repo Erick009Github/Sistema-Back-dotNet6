@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace SistemaErick2.Models;
+
+public partial class Ingreso
+{
+    public int Idingreso { get; set; }
+
+    public int Idproveedor { get; set; }
+
+    public int Idusuario { get; set; }
+
+    public string TipoComprobante { get; set; } = null!;
+
+    public string? SerieComprobante { get; set; }
+
+    public string NumComprobante { get; set; } = null!;
+
+    public DateTime FechaHora { get; set; }
+
+    public int Impuesto { get; set; }
+
+    public int Total { get; set; }
+
+    public string Estado { get; set; } = null!;
+
+    public virtual ICollection<DetalleIngreso> DetalleIngresos { get; } = new List<DetalleIngreso>();
+
+    public virtual Persona IdproveedorNavigation { get; set; } = null!;
+
+    public virtual Usuario IdusuarioNavigation { get; set; } = null!;
+}
