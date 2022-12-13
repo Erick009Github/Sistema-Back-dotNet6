@@ -2,10 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SistemaErick2.Models;
 
-public partial class CrearUsuario
+public partial class ActualizarUsuario
 {
    
-   
+    public int Idusuario  {get;set;} 
     public int Idrol { get; set; }
 
     public string Nombre { get; set; } = null!;
@@ -22,5 +22,7 @@ public partial class CrearUsuario
     public string Email { get; set; } = null!;
 
     public string Password { get; set; } = null!;
+
+    public bool Act_Password { get; set; }
  
 }

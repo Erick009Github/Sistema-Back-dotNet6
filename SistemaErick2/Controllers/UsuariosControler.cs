@@ -96,7 +96,7 @@ namespace SistemaErick2.Controllers
 
           // PUT: api/Usuarios/Actualizar
         [HttpPut("[action]")]
-        public async Task<IActionResult> Actualizar([FromBody] CrearUsuario model)
+        public async Task<IActionResult> Actualizar([FromBody] ActualizarUsuario model)
         {
             if (!ModelState.IsValid)
             {
