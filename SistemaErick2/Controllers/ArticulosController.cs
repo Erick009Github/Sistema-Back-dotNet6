@@ -146,7 +146,7 @@ namespace SistemaErick2.Controllers
         }
 
 
-        // PUT: api/Categorias/Actualizar
+        // PUT: api/Articulos/Actualizar
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Articulo model)
         {
