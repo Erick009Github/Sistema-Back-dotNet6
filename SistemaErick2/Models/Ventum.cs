@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SistemaErick2.Models;
 
@@ -25,6 +26,7 @@ public partial class Ventum
 
     public string Estado { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual ICollection<DetalleVentum> DetalleVenta { get; } = new List<DetalleVentum>();
 
     public virtual Persona IdclienteNavigation { get; set; } = null!;

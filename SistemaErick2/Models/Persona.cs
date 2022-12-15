@@ -19,9 +19,9 @@ public partial class Persona
 
     public string? Telefono { get; set; }
 
-    public string? Email { get; set; }
+    public string Email { get; set; }
 
-    public virtual ICollection<Ingreso> Ingresos { get; } = new List<Ingreso>();
+    public virtual ICollection<Ingreso> Ingresos { get; set; } = new List<Ingreso>();
 
-    public virtual ICollection<Ventum> Venta { get; } = new List<Ventum>();
+    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
 }

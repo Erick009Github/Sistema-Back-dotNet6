@@ -49,12 +49,6 @@ namespace SistemaErick2.Controllers
 
         }
 
-
-
-
-
-
-
     }
 
 }

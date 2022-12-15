@@ -24,7 +24,7 @@ namespace SistemaErick2.Controllers
             var usuario = await _context.Usuarios.Include(u => u.IdrolNavigation).ToListAsync();
 
             return usuario.Select(u => new Usuario
-            {
+            { 
               Idusuario= u.Idusuario,
               Idrol = u.Idrol,
               Nombre = u.Nombre,
