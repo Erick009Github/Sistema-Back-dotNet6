@@ -207,11 +207,38 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(Login model)
+        {
+            var email = model.Email.ToLower();
+
+            var usuario = await _context.Usuarios.Include(u=>u.Rol).FirstOrDefaultAsync(u=>u.Email==Email);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            if (!VerificarPasswordHash(model.Password,usuario.PasswordHash,usuario.PasswordHalt))
+            {
+                return NotFound();
+            }
+
+        }
+
+        private bool VerificarPasswordHash(string Password, byte[] PasswordHashAlmacenado, byte[] PasswordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var passwordHashNuevo = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return new ReadOnlySpan<byte>(passwordHashAlmacenado).SequenceEqual(new ReadOnlySpan<byte>(passwordHashNuevo));
+            }
+        }
 
          private bool UsuarioExists(int id)
         {
             return _context.Usuarios.Any(e => e.Idusuario == id);
         }
-
+         
     }
 }

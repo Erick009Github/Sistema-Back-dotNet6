@@ -25,6 +25,7 @@ public partial class Usuario
 
     public byte[] PasswordSalt { get; set; } = null!;
 
+
     public bool? Condicion { get; set; }
 
     public virtual Rol IdrolNavigation { get; set; } = null!;
