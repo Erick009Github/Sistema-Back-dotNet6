@@ -1,7 +1,10 @@
-using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace SistemaErick2.Controllers
 {
@@ -10,10 +13,12 @@ namespace SistemaErick2.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly BdsistemaContext _context;
+        private readonly IConfiguration _config;
 
-        public UsuariosController(BdsistemaContext context)
+        public UsuariosController(BdsistemaContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
          // GET: api/Usuarios/Listar
@@ -208,33 +213,63 @@ namespace SistemaErick2.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login(Login model)
+        public async Task<IActionResult> Login (Login model)
         {
             var email = model.Email.ToLower();
 
-            var usuario = await _context.Usuarios.Include(u=>u.Rol).FirstOrDefaultAsync(u=>u.Email==Email);
+            var usuario = await _context.Usuarios.Where(u=>u.Condicion==true).Include(u=>u.IdrolNavigation).FirstOrDefaultAsync(u=>u.Email==email);
 
             if (usuario == null)
             {
                 return NotFound();
             }
 
-            if (!VerificarPasswordHash(model.Password,usuario.PasswordHash,usuario.PasswordHalt))
+            if (!VerificarPasswordHash(model.Password,usuario.PasswordHash,usuario.PasswordSalt))
             {
                 return NotFound();
             }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier,usuario.Idusuario.ToString()),
+                new Claim(ClaimTypes.Email, email),
+                new Claim (ClaimTypes.Role, usuario.IdrolNavigation.Nombre),
+                new Claim("idusuario",usuario.Idusuario.ToString()),
+                new Claim("rol",usuario.IdrolNavigation.Nombre),
+                new Claim ("nombre", usuario.Nombre),
+            };
+
+            return Ok(
+                new {token = GenerarToken(claims)}
+            );
 
         }
 
         private bool VerificarPasswordHash(string Password, byte[] PasswordHashAlmacenado, byte[] PasswordSalt)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(PasswordSalt))
             {
-                var passwordHashNuevo = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return new ReadOnlySpan<byte>(passwordHashAlmacenado).SequenceEqual(new ReadOnlySpan<byte>(passwordHashNuevo));
+                var passwordHashNuevo = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+                return new ReadOnlySpan<byte>(PasswordHashAlmacenado).SequenceEqual(new ReadOnlySpan<byte>(passwordHashNuevo));
             }
         }
 
+        private string GenerarToken(List<Claim>claims)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+              _config["Jwt:Issuer"],
+              _config["Jwt:Issuer"],
+              expires: DateTime.Now.AddMinutes(15),
+              signingCredentials: creds,
+              claims: claims);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+            
+
+        }
          private bool UsuarioExists(int id)
         {
             return _context.Usuarios.Any(e => e.Idusuario == id);
