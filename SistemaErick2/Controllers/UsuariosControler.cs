@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 
+
 namespace SistemaErick2.Controllers
 {
     [Route("api/[controller]")]
@@ -22,6 +23,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Usuarios/Listar
+    
         [HttpGet("[action]")]
         public async Task<IEnumerable<Usuario>> Listar()
 
@@ -46,6 +48,7 @@ namespace SistemaErick2.Controllers
 
         
         // POST: api/Categorias/Crear
+     
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearUsuario model)
         {
@@ -100,6 +103,7 @@ namespace SistemaErick2.Controllers
         }
 
           // PUT: api/Usuarios/Actualizar
+
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] ActualizarUsuario model)
         {
@@ -149,6 +153,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Usuarios/Activar/1
+     
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -181,6 +186,7 @@ namespace SistemaErick2.Controllers
         }
 
          // PUT: api/Usuarios/Desactivar/1
+  
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {

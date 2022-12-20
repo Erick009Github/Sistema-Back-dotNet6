@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SistemaErick2.Models;
 
@@ -30,7 +31,9 @@ public partial class Usuario
 
     public virtual Rol IdrolNavigation { get; set; } = null!;
 
-    public virtual ICollection<Ingreso> Ingresos { get; } = new List<Ingreso>();
+    [JsonIgnore]
+    public virtual ICollection<Ingreso> Ingresos { get; set; } = new List<Ingreso>();
 
-    public virtual ICollection<Ventum> Venta { get; } = new List<Ventum>();
+    [JsonIgnore]
+    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
@@ -20,6 +21,7 @@ namespace SistemaErick2.Controllers
       
 
             // GET: api/Personas/ListarClientes
+      
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarClientes()
 
@@ -42,6 +44,7 @@ namespace SistemaErick2.Controllers
 
         
             // GET: api/Personas/ListarProveedores
+    
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarProveedores()
 
@@ -60,9 +63,22 @@ namespace SistemaErick2.Controllers
                 Email = p.Email
              
             });
-        } 
+        }
 
-              // POST: api/Personas/Crear
+        // GET: api/Personas/SelectProveedores
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<SelectProveedores>> SelectProveedores()
+        {
+            var persona = await _context.Personas.Where(p=>p.TipoPersona=="Proveedor").ToListAsync();
+
+            return persona.Select(p => new SelectProveedores
+            {
+                Idpersona = p.Idpersona,
+                Nombre = p.Nombre,
+               
+            }); 
+        }
+        // POST: api/Personas/Crear
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] Persona model)
         {
@@ -103,6 +119,7 @@ namespace SistemaErick2.Controllers
         }
 
               // PUT: api/Personas/Actualizar
+ 
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Persona model)
         {

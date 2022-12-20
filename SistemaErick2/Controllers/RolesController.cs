@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
 
 namespace SistemaErick2.Controllers
 {
-
+  
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase

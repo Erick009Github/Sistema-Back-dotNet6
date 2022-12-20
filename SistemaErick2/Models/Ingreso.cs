@@ -27,7 +27,7 @@ public partial class Ingreso
     public string Estado { get; set; } = null!;
 
     [JsonIgnore]
-    public virtual ICollection<DetalleIngreso> DetalleIngresos { get; } = new List<DetalleIngreso>();
+    public virtual ICollection<DetalleIngreso> DetalleIngresos { get; set; } = new List<DetalleIngreso>();
 
     public virtual Persona IdproveedorNavigation { get; set; } = null!;
 

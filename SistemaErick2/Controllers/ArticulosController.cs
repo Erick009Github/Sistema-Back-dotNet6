@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
@@ -36,6 +37,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/Listar
+        
         [HttpGet("[action]")]
         public async Task<IEnumerable<Articulo>> Listar()
         {
@@ -57,6 +59,7 @@ namespace SistemaErick2.Controllers
 
         }
         // GET: api/Articulos/Mostrar/1
+      
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
@@ -83,7 +86,8 @@ namespace SistemaErick2.Controllers
             });
         }
 
-        // PUT: api/Articulos/Actualizar
+        // PUT: api/Articulos/Editar
+      
         [HttpPut("[action]")]
         public IActionResult Editar([FromBody] Articulo model)
         {
@@ -127,6 +131,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Articulos/Crear
+      
         [HttpPost("[action]")]
         public IActionResult Crear([FromBody] Articulo model)
         {
@@ -147,6 +152,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Actualizar
+      
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Articulo model)
         {
@@ -190,6 +196,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Activar/1
+      
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -222,6 +229,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Articulos/Desactivar/1
+  
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {

@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
 
 namespace SistemaErick2.Controllers
 {
+    
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class CategoriasController : ControllerBase
     {
 
@@ -18,6 +20,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Categorias/Listar
+   
         [HttpGet("[action]")]
         public async Task<IEnumerable<Categorium>> Listar()
         {
