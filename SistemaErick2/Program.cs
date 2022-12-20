@@ -38,7 +38,7 @@ builder.Services.AddSwaggerGen(options =>{
     });
 });
 
-builder.Services.AddDbContext<BdsistemaContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
+builder.Services.AddDbContext<BdsistemaContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
 
 builder.Services.AddControllers().AddJsonOptions(opt => {
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
