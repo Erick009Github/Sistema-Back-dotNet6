@@ -117,7 +117,8 @@ namespace SistemaErick2.Controllers
         public async Task<IActionResult> BuscarCodigoIngreso ([FromRoute] string Codigo)
         {
 
-            var articulo = await _context.Articulos.Include(a => a.IdcategoriaNavigation).Where(a=>a.Condicion==true).SingleOrDefaultAsync(a => a.Codigo == Codigo);
+            var articulo = await _context.Articulos.Include(a => a.IdcategoriaNavigation).Where(a=>a.Condicion==true)
+            .SingleOrDefaultAsync(a => a.Codigo == Codigo);
 
             if (articulo == null)
             {

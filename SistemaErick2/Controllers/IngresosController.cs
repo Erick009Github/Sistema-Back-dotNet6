@@ -48,7 +48,7 @@ namespace SistemaErick2.Controllers
         // POST: api/Ingresos/Crear
        
         [HttpPost("[action]")]
-        public async Task<IActionResult> Crear([FromBody] Ingreso model)
+        public async Task<IActionResult> Crear([FromBody] CrearIngreso model)
         {
             if (!ModelState.IsValid)
             {
@@ -57,6 +57,7 @@ namespace SistemaErick2.Controllers
             var fechaHora = DateTime.Now;
 
             Ingreso ingreso = new Ingreso {
+                
                 Idproveedor = model.Idproveedor,
                 Idusuario = model.Idusuario,
                 TipoComprobante = model.TipoComprobante,
@@ -74,7 +75,7 @@ namespace SistemaErick2.Controllers
                 await _context.SaveChangesAsync();
 
                 var id = ingreso.Idingreso;
-                foreach (var det in model.DetalleIngresos)
+                foreach (var det in model.Detalles)
                 {
                     DetalleIngreso detalle = new DetalleIngreso
                     {

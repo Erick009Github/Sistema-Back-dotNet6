@@ -260,3 +260,4 @@ C:\Users\Erick\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net
 C:\Users\Erick\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\SistemaErick2.pdb
 C:\Users\Erick\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\SistemaErick2.genruntimeconfig.cache
 C:\Users\Erick\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\ref\SistemaErick2.dll
+C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -31,5 +31,5 @@ public partial class Ingreso
 
     public virtual Persona IdproveedorNavigation { get; set; } = null!;
 
-    public virtual Usuario IdusuarioNavigation { get; set; } = null!;
+    public virtual Usuario IdusuarioNavigation { get; set; } = null! ;
 }
