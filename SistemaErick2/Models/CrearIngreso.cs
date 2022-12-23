@@ -21,5 +21,5 @@ public partial class CrearIngreso
 
     //Propiedades Detalle
     [Required]
-    public List<CrearDetalle>? Detalles {get; set;}
+    public List<CrearDetalle> Detalles {get; set;}
 }

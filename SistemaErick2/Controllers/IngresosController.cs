@@ -45,6 +45,27 @@ namespace SistemaErick2.Controllers
             });
         }
 
+           // GET: api/Ingresos/ListarDetalles
+       
+
+        [HttpGet("[action]/{idingreso}")]
+        public async Task<IEnumerable<DetalleIngreso>> ListarDetalles([FromRoute] int Idingreso)
+        {
+            var detalle = await _context.DetalleIngresos
+                .Include(a => a.IdarticuloNavigation)
+                .Where(d=>d.Idingreso==Idingreso)
+                .ToListAsync();
+
+            return detalle.Select(d => new DetalleIngreso
+            {
+                Idarticulo=d.Idarticulo,
+                IdarticuloNavigation=d.IdarticuloNavigation,
+                Cantidad=d.Cantidad,
+                Precio=d.Precio
+            });
+
+        }
+
         // POST: api/Ingresos/Crear
        
         [HttpPost("[action]")]
@@ -95,6 +116,39 @@ namespace SistemaErick2.Controllers
 
             return Ok();
         }
+
+         // PUT: api/Ingresos/Anular/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Anular([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var ingreso = await _context.Ingresos.FirstOrDefaultAsync(i=>i.Idingreso == id);
+
+            if (ingreso == null)
+            {
+                return NotFound();
+            }
+
+            ingreso.Estado = "Anulado";
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
 
     }
 

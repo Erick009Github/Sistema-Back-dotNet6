@@ -26,9 +26,9 @@ public partial class Articulo
 
     public bool? Condicion { get; set; }
 
-    public virtual ICollection<DetalleIngreso> DetalleIngresos { get; } = new List<DetalleIngreso>();
+    public virtual ICollection<DetalleIngreso> DetalleIngresos { get; set; } = new List<DetalleIngreso>();
 
-    public virtual ICollection<DetalleVentum> DetalleVenta { get; } = new List<DetalleVentum>();
+    public virtual ICollection<DetalleVentum> DetalleVenta { get; set; } = new List<DetalleVentum>();
 
     public virtual Categorium? IdcategoriaNavigation { get; set; }
 }
