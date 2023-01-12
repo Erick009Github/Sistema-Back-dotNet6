@@ -22,7 +22,8 @@ namespace SistemaErick2.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<Ingreso>> Listar()
         {
-            var ingreso = await _context.Ingresos.Include(i => i.IdusuarioNavigation)
+            var ingreso = await _context.Ingresos
+            .Include(i => i.IdusuarioNavigation)
             .Include(i =>i.IdproveedorNavigation)
             .OrderByDescending(i=>i.Idingreso)
             .Take(100)
@@ -45,9 +46,37 @@ namespace SistemaErick2.Controllers
             });
         }
 
-           // GET: api/Ingresos/ListarDetalles
-       
+         // GET: api/Ingresos/ConsultaFechas
+        [HttpGet("[action]/{FechaInicio}/{FechaFin}")]
+        public async Task<IEnumerable<Ingreso>> ConsultaFechas([FromRoute]DateTime FechaInicio,DateTime FechaFin)
+        {
+            var ingreso = await _context.Ingresos
+                .Include(v => v.IdusuarioNavigation)
+                .Include(v => v.IdproveedorNavigation)
+                .Where(i => i.FechaHora>=FechaInicio)
+                .Where(i => i.FechaHora<=FechaFin)
+                .OrderByDescending(v => v.Idingreso)
+                .Take(100)
+                .ToListAsync();
 
+            return ingreso.Select(i => new Ingreso{
+                Idingreso = i.Idingreso,
+                Idproveedor=i.Idproveedor,
+                IdproveedorNavigation=i.IdproveedorNavigation,
+                Idusuario = i.Idusuario,
+                IdusuarioNavigation=i.IdusuarioNavigation,
+                TipoComprobante=i.TipoComprobante,
+                SerieComprobante = i.SerieComprobante,
+                NumComprobante = i.NumComprobante,
+                FechaHora = i.FechaHora,
+                Impuesto = i.Impuesto,
+                Total = i.Total,
+                Estado = i.Estado
+            });
+
+        }
+
+         // GET: api/Ingresos/ListarDetalles
         [HttpGet("[action]/{idingreso}")]
         public async Task<IEnumerable<DetalleIngreso>> ListarDetalles([FromRoute] int Idingreso)
         {
@@ -109,13 +138,13 @@ namespace SistemaErick2.Controllers
                 }
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }
 
             return Ok();
-        }
+         }
 
          // PUT: api/Ingresos/Anular/1
         [HttpPut("[action]/{id}")]

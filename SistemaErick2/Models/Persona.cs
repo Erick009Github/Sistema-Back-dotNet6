@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SistemaErick2.Models;
 
@@ -20,8 +21,10 @@ public partial class Persona
     public string? Telefono { get; set; }
 
     public string Email { get; set; }
-
+     
+    [JsonIgnore]
     public virtual ICollection<Ingreso> Ingresos { get; set; } = new List<Ingreso>();
-
+    
+    [JsonIgnore]
     public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
 }

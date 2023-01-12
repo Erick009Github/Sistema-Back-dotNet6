@@ -130,7 +130,7 @@ namespace SistemaErick2.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }

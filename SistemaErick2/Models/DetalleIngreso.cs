@@ -9,8 +9,6 @@ public partial class DetalleIngreso
 
     public int Idingreso { get; set; }
 
-    public string articulo  { get; set; }
-
     public int Idarticulo { get; set; }
 
     public int Cantidad { get; set; }

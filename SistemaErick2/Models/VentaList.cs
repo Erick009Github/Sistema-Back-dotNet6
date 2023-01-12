@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace SistemaErick2.Models;
 
-public partial class Ventum
+public partial class VentaList
 {
     public int Idventa { get; set; }
 
     public int Idcliente { get; set; }
-
+  
     public int Idusuario { get; set; }
-
+   
     public string TipoComprobante { get; set; } = null!;
 
     public string? SerieComprobante { get; set; }
@@ -26,10 +26,8 @@ public partial class Ventum
 
     public string Estado { get; set; } = null!;
 
-    [JsonIgnore]
-    public virtual ICollection<DetalleVentum> DetalleVenta { get; set;} = new List<DetalleVentum>();
-
     public virtual Persona IdclienteNavigation { get; set; } = null!;
 
     public virtual Usuario IdusuarioNavigation { get; set; } = null!;
+
 }

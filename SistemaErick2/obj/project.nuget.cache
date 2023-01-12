@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3p1yRlz6LO2Pc4LJBTJ1dPyLq+56msmd9TiZ5QaIJIpn2ZYPg+dmhRcEzIfvwDJALFb2tgGK7R8Gzi6sr4s60A==",
+  "dgSpecHash": "d8CSPgxJyknK36zYCvPGFrO8MXqlfYyGasCdaYvkgz5CLusAzd4n39GhKCK388SY3imaohyox7GefcSYmb3/6w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\SistemaErick2\\SistemaErick2.csproj",
+  "projectFilePath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\sistemaErick2\\SistemaErick2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\drefr\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

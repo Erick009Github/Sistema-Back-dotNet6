@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SistemaErick2.Models;
 
-public partial class CrearDetalle 
+public partial class CrearDetalleVenta
 {
    
     public int Idarticulo { get; set; }
@@ -12,4 +12,6 @@ public partial class CrearDetalle
 
     public int Precio { get; set; }
 
-}   
+     public int Descuento { get; set; }
+
+}

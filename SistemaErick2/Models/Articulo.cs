@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Text.Json.Serialization;
 
 
 namespace SistemaErick2.Models;
@@ -26,8 +26,9 @@ public partial class Articulo
 
     public bool? Condicion { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<DetalleIngreso> DetalleIngresos { get; set; } = new List<DetalleIngreso>();
-
+    [JsonIgnore]
     public virtual ICollection<DetalleVentum> DetalleVenta { get; set; } = new List<DetalleVentum>();
 
     public virtual Categorium? IdcategoriaNavigation { get; set; }

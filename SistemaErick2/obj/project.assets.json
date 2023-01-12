@@ -3765,11 +3765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\SistemaErick2\\SistemaErick2.csproj",
+      "projectUniqueName": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\sistemaErick2\\SistemaErick2.csproj",
       "projectName": "SistemaErick2",
-      "projectPath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\SistemaErick2\\SistemaErick2.csproj",
+      "projectPath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\sistemaErick2\\SistemaErick2.csproj",
       "packagesPath": "C:\\Users\\drefr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\SistemaErick2\\obj\\",
+      "outputPath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\sistemaErick2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3848,7 +3848,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

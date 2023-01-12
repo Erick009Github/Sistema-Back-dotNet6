@@ -30,14 +30,11 @@ namespace SistemaErick2.Controllers
             }catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, response = lista });
-
-
             }
-        
+
         }
 
         // GET: api/Articulos/Listar
-        
         [HttpGet("[action]")]
         public async Task<IEnumerable<Articulo>> Listar()
         {
@@ -110,14 +107,68 @@ namespace SistemaErick2.Controllers
 
         }
 
+        // GET: api/Articulos/ListarVenta/texto
+        [HttpGet("[action]/{texto}")]
+        public async Task<IEnumerable<Articulo>> ListarVenta([FromRoute] string texto)
+        {
+            var articulo = await _context.Articulos.Include(a => a.IdcategoriaNavigation)
+                .Where(a=>a.Nombre.Contains(texto))
+                .Where(a=>a.Condicion==true)
+                .Where(a=>a.Stock>0)
+                .ToListAsync();
+
+            return articulo.Select(a => new Articulo
+            {
+                Idarticulo = a.Idarticulo,
+                Idcategoria = a.Idcategoria,
+                IdcategoriaNavigation= a.IdcategoriaNavigation,
+                Codigo = a.Codigo,
+                Nombre = a.Nombre,
+                Stock = a.Stock,
+                PrecioVenta = a.PrecioVenta,
+                Descripcion = a.Descripcion,
+                Condicion = a.Condicion
+            });
+
+        }
+
 
          // GET: api/Articulos/BuscarCodigoIngreso/1546845213
-      
         [HttpGet("[action]/{codigo}")]
         public async Task<IActionResult> BuscarCodigoIngreso ([FromRoute] string Codigo)
         {
 
             var articulo = await _context.Articulos.Include(a => a.IdcategoriaNavigation).Where(a=>a.Condicion==true)
+            .SingleOrDefaultAsync(a => a.Codigo == Codigo);
+
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new Articulo
+            {
+                Idarticulo=articulo.Idarticulo,
+                Idcategoria=articulo.Idcategoria,
+                Codigo=articulo.Codigo,
+                IdcategoriaNavigation=articulo.IdcategoriaNavigation,
+                Nombre=articulo.Nombre,
+                Descripcion=articulo.Descripcion,
+                Stock=articulo.Stock,
+                PrecioVenta=articulo.PrecioVenta,
+                Condicion=articulo.Condicion,
+
+            });
+        }
+
+         // GET: api/Articulos/BuscarCodigoVenta/1546845213
+        [HttpGet("[action]/{codigo}")]
+        public async Task<IActionResult> BuscarCodigoVenta ([FromRoute] string Codigo)
+        {
+
+            var articulo = await _context.Articulos.Include(a => a.IdcategoriaNavigation)
+            .Where(a=>a.Condicion==true)
+            .Where(a=>a.Stock>0)
             .SingleOrDefaultAsync(a => a.Codigo == Codigo);
 
             if (articulo == null)

@@ -78,6 +78,21 @@ namespace SistemaErick2.Controllers
                
             }); 
         }
+
+        // GET: api/Personas/SelectClientes
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<SelectProveedores>> SelectClientes()
+        {
+            var persona = await _context.Personas.Where(p=>p.TipoPersona=="Cliente").ToListAsync();
+
+            return persona.Select(p => new SelectProveedores
+            {
+                Idpersona = p.Idpersona,
+                Nombre = p.Nombre,
+               
+            }); 
+        }
+
         // POST: api/Personas/Crear
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] Persona model)
