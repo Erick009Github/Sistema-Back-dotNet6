@@ -229,6 +229,34 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
+        // DELETE: api/Ventas/Eliminar/1
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Eliminar([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var venta = await _context.Venta.FindAsync(id);
+            if (venta == null)
+            {
+                return NotFound();
+            }
+
+            _context.Venta.Remove(venta);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok(venta);
+        }
+
     }
 
 

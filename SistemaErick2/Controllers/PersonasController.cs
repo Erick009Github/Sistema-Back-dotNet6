@@ -18,50 +18,47 @@ namespace SistemaErick2.Controllers
             _context = context;
         }
 
-      
-
-            // GET: api/Personas/ListarClientes
-      
+        // GET: api/Personas/ListarClientes
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarClientes()
 
         {
-            var persona = await _context .Personas.Where(p => p.TipoPersona=="Cliente").ToListAsync();
+            var persona = await _context.Personas.Where(p => p.TipoPersona == "Cliente").ToListAsync();
 
             return persona.Select(p => new Persona
             {
                 Idpersona = p.Idpersona,
-                TipoPersona=p.TipoPersona,
+                TipoPersona = p.TipoPersona,
                 Nombre = p.Nombre,
                 TipoDocumento = p.TipoDocumento,
                 NumDocumento = p.NumDocumento,
                 Direccion = p.Direccion,
                 Telefono = p.Telefono,
                 Email = p.Email
-            
-            });
-        } 
 
-        
+            });
+        }
+
+
         // GET: api/Personas/ListarProveedores
         //[Authorize(Roles ="Bodeguero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarProveedores()
 
         {
-            var persona = await _context .Personas.Where(p => p.TipoPersona=="Proveedor").ToListAsync();
+            var persona = await _context.Personas.Where(p => p.TipoPersona == "Proveedor").ToListAsync();
 
             return persona.Select(p => new Persona
             {
                 Idpersona = p.Idpersona,
-                TipoPersona=p.TipoPersona,
+                TipoPersona = p.TipoPersona,
                 Nombre = p.Nombre,
                 TipoDocumento = p.TipoDocumento,
                 NumDocumento = p.NumDocumento,
                 Direccion = p.Direccion,
                 Telefono = p.Telefono,
                 Email = p.Email
-            
+
             });
         }
 
@@ -69,28 +66,28 @@ namespace SistemaErick2.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectProveedores>> SelectProveedores()
         {
-            var persona = await _context.Personas.Where(p=>p.TipoPersona=="Proveedor").ToListAsync();
+            var persona = await _context.Personas.Where(p => p.TipoPersona == "Proveedor").ToListAsync();
 
             return persona.Select(p => new SelectProveedores
             {
                 Idpersona = p.Idpersona,
                 Nombre = p.Nombre,
-        
-            }); 
+
+            });
         }
 
         // GET: api/Personas/SelectClientes
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectProveedores>> SelectClientes()
         {
-            var persona = await _context.Personas.Where(p=>p.TipoPersona=="Cliente").ToListAsync();
+            var persona = await _context.Personas.Where(p => p.TipoPersona == "Cliente").ToListAsync();
 
             return persona.Select(p => new SelectProveedores
             {
                 Idpersona = p.Idpersona,
                 Nombre = p.Nombre,
-            
-            }); 
+
+            });
         }
 
         // POST: api/Personas/Crear
@@ -111,7 +108,7 @@ namespace SistemaErick2.Controllers
 
             Persona persona = new Persona
             {
-                TipoPersona=model.TipoPersona,
+                TipoPersona = model.TipoPersona,
                 Nombre = model.Nombre,
                 TipoDocumento = model.TipoDocumento,
                 NumDocumento = model.NumDocumento,
@@ -133,8 +130,7 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-              // PUT: api/Personas/Actualizar
- 
+        // PUT: api/Personas/Actualizar
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Persona model)
         {
@@ -176,11 +172,34 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-         private bool PersonaExists(int id)
+        // DELETE: api/Personas/Eliminar/1
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Eliminar([FromRoute] int id)
         {
-            return _context.Personas.Any(e => e.Idpersona == id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var persona = await _context.Personas.FindAsync(id);
+            if (persona == null)
+            {
+                return NotFound();
+            }
+
+            _context.Personas.Remove(persona);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok(persona);
         }
 
-     }  
+    }
 
 }

@@ -20,7 +20,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Categorias/Listar
-   
+
         [HttpGet("[action]")]
         public async Task<IEnumerable<Categorium>> Listar()
         {
@@ -47,7 +47,7 @@ namespace SistemaErick2.Controllers
             {
                 Idcategoria = c.Idcategoria,
                 Nombre = c.Nombre,
-               
+            
             });
 
         }

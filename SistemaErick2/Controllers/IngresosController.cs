@@ -177,8 +177,36 @@ namespace SistemaErick2.Controllers
             }
 
             return Ok();
+
         }
 
+        // DELETE: api/Ingresos/Eliminar/1
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Eliminar([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ingreso = await _context.Ingresos.FindAsync(id);
+            if (ingreso == null)
+            {
+                return NotFound();
+            }
+
+            _context.Ingresos.Remove(ingreso);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok(ingreso);
+        }
 
     }
 

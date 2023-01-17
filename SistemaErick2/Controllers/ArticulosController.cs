@@ -365,9 +365,34 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-        private bool ArticuloExists(int id)
+        // DELETE: api/Articulos/Eliminar/1
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Eliminar([FromRoute] int id)
         {
-            return _context.Articulos.Any(e => e.Idarticulo == id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var articulo = await _context.Articulos.FindAsync(id);
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+
+            _context.Articulos.Remove(articulo);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok(articulo);
         }
+
+        
     }
 }
