@@ -256,3 +256,8 @@ C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\sistemaErick2\obj\Debug\net
 C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\sistemaErick2\obj\Debug\net6.0\SistemaErick2.pdb
 C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\sistemaErick2\obj\Debug\net6.0\SistemaErick2.genruntimeconfig.cache
 C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\sistemaErick2\obj\Debug\net6.0\ref\SistemaErick2.dll
+C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\staticwebassets\msbuild.SistemaErick2.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\staticwebassets\msbuild.build.SistemaErick2.props
+C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.SistemaErick2.props
+C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SistemaErick2.props
+C:\Users\drefr\Documents\GitHub\Sistema-Back-dotNet6\SistemaErick2\obj\Debug\net6.0\staticwebassets.pack.json

@@ -14,7 +14,7 @@ namespace SistemaErick2.Controllers
         public VentasController(BdsistemaContext context)
         {
             _context = context;
-      
+    
         }
     
         // GET: api/Ventas/Listar
@@ -93,7 +93,7 @@ namespace SistemaErick2.Controllers
 
             });
 
-         }
+        }
 
         // GET: api/Ventas/ConsultaFechas
         [HttpGet("[action]/{FechaInicio}/{FechaFin}")]
@@ -155,7 +155,7 @@ namespace SistemaErick2.Controllers
             }
             var fechaHora = DateTime.Now;
 
-            Ventum venta = new Ventum
+            Ventum venta = new ()
             {
                 Idcliente = model.Idcliente,
                 Idusuario = model.Idusuario,
@@ -177,7 +177,7 @@ namespace SistemaErick2.Controllers
                 var id = venta.Idventa;
                 foreach (var det in model.Detalles)
                 {
-                    DetalleVentum detalle = new DetalleVentum
+                    DetalleVentum detalle = new ()
                     {
                         Idventa = id,
                         Idarticulo = det.Idarticulo,

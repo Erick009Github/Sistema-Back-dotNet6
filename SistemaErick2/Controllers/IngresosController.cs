@@ -31,18 +31,18 @@ namespace SistemaErick2.Controllers
 
             return ingreso .Select(i => new Ingreso
             {
-               Idingreso=i.Idingreso,
-               Idproveedor=i.Idproveedor,
-               IdproveedorNavigation=i.IdproveedorNavigation,
-               Idusuario=i.Idusuario,
-               IdusuarioNavigation=i.IdusuarioNavigation,
-               TipoComprobante=i.TipoComprobante,
-               NumComprobante=i.NumComprobante,
-               SerieComprobante=i.SerieComprobante,
-               FechaHora=i.FechaHora,
-               Impuesto=i.Impuesto,
-               Total=i.Total,
-               Estado=i.Estado
+            Idingreso=i.Idingreso,
+            Idproveedor=i.Idproveedor,
+            IdproveedorNavigation=i.IdproveedorNavigation,
+            Idusuario=i.Idusuario,
+            IdusuarioNavigation=i.IdusuarioNavigation,
+            TipoComprobante=i.TipoComprobante,
+            NumComprobante=i.NumComprobante,
+            SerieComprobante=i.SerieComprobante,
+            FechaHora=i.FechaHora,
+            Impuesto=i.Impuesto,
+            Total=i.Total,
+            Estado=i.Estado
             });
         }
 
@@ -96,7 +96,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Ingresos/Crear
-       
+    
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearIngreso model)
         {
@@ -144,7 +144,7 @@ namespace SistemaErick2.Controllers
             }
 
             return Ok();
-         }
+        }
 
          // PUT: api/Ingresos/Anular/1
         [HttpPut("[action]/{id}")]
@@ -168,6 +168,7 @@ namespace SistemaErick2.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+                
             }
             catch (DbUpdateConcurrencyException)
             {

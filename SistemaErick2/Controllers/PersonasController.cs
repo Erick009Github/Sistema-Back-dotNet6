@@ -38,13 +38,13 @@ namespace SistemaErick2.Controllers
                 Direccion = p.Direccion,
                 Telefono = p.Telefono,
                 Email = p.Email
-             
+            
             });
         } 
 
         
-            // GET: api/Personas/ListarProveedores
-    
+        // GET: api/Personas/ListarProveedores
+        //[Authorize(Roles ="Bodeguero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarProveedores()
 
@@ -61,7 +61,7 @@ namespace SistemaErick2.Controllers
                 Direccion = p.Direccion,
                 Telefono = p.Telefono,
                 Email = p.Email
-             
+            
             });
         }
 
@@ -75,7 +75,7 @@ namespace SistemaErick2.Controllers
             {
                 Idpersona = p.Idpersona,
                 Nombre = p.Nombre,
-               
+        
             }); 
         }
 
@@ -89,7 +89,7 @@ namespace SistemaErick2.Controllers
             {
                 Idpersona = p.Idpersona,
                 Nombre = p.Nombre,
-               
+            
             }); 
         }
 

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace SistemaErick2.Models;
 
 public partial class BdsistemaContext : DbContext
 {
     public BdsistemaContext()
     {
+        
     }
 
     public BdsistemaContext(DbContextOptions<BdsistemaContext> options)
@@ -40,6 +42,8 @@ public partial class BdsistemaContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
         modelBuilder.Entity<Articulo>(entity =>
         {
             entity.HasKey(e => e.Idarticulo).HasName("PK__articulo__BCE2F8F70A5872C2");
@@ -333,5 +337,8 @@ public partial class BdsistemaContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
+    
+
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
 }

@@ -56,7 +56,7 @@ namespace SistemaErick2.Controllers
 
         }
         // GET: api/Articulos/Mostrar/1
-      
+    
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
@@ -192,7 +192,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Articulos/Editar
-      
+    
         [HttpPut("[action]")]
         public IActionResult Editar([FromBody] Articulo model)
         {
@@ -205,13 +205,13 @@ namespace SistemaErick2.Controllers
 
             try
             {
-                /* articulo.Codigo = model.Codigo is null ? articulo.Codigo : articulo.Codigo;
-                 articulo.Nombre = model.Nombre is null ? articulo.Nombre : articulo.Nombre;
-                 articulo.PrecioVenta = model.PrecioVenta is null ? articulo.PrecioVenta : articulo.PrecioVenta;
-                 articulo.Stock = model.Stock is null ? articulo.Stock : articulo.Stock;
-                 articulo.Descripcion = model.Descripcion is null ? articulo.Descripcion : articulo.Descripcion;
-                 articulo.Condicion = model.Condicion is null ? articulo.Condicion : articulo.Condicion;
-                 articulo.Idcategoria = model.Idcategoria is null ? articulo.Idcategoria : articulo.Idcategoria;*/
+                articulo.Codigo = model.Codigo is null ? articulo.Codigo : articulo.Codigo;
+                articulo.Nombre = model.Nombre is null ? articulo.Nombre : articulo.Nombre;
+                articulo.PrecioVenta = model.PrecioVenta is null ? articulo.PrecioVenta : articulo.PrecioVenta;
+                articulo.Stock = model.Stock is null ? articulo.Stock : articulo.Stock;
+                articulo.Descripcion = model.Descripcion is null ? articulo.Descripcion : articulo.Descripcion;
+                articulo.Condicion = model.Condicion is null ? articulo.Condicion : articulo.Condicion;
+                articulo.Idcategoria = model.Idcategoria is null ? articulo.Idcategoria : articulo.Idcategoria;
 
 
                 articulo.Idcategoria = model.Idcategoria;
@@ -236,7 +236,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Articulos/Crear
-      
+    
         [HttpPost("[action]")]
         public IActionResult Crear([FromBody] Articulo model)
         {
@@ -257,7 +257,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Actualizar
-      
+    
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Articulo model)
         {
@@ -284,8 +284,8 @@ namespace SistemaErick2.Controllers
             articulo.PrecioVenta= model.PrecioVenta;
             articulo.Stock = model.Stock;
             articulo.Descripcion= model.Descripcion;
- 
-             
+
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -301,7 +301,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Activar/1
-      
+    
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -333,8 +333,7 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-        // PUT: api/Articulos/Desactivar/1
-  
+        // PUT: api/Articulos/Desactivar/1 
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {

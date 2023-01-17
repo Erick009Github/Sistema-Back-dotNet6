@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d8CSPgxJyknK36zYCvPGFrO8MXqlfYyGasCdaYvkgz5CLusAzd4n39GhKCK388SY3imaohyox7GefcSYmb3/6w==",
+  "dgSpecHash": "QXClHwlpffhHByhvw3wcCL3ZiUTUsMCGShhCZlaBpahrokYrpyKH/BsJ9LNqwIWA24hoymqHxC+SAuxUPhZAKQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\sistemaErick2\\SistemaErick2.csproj",
+  "projectFilePath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\SistemaErick2\\SistemaErick2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\drefr\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
@@ -78,7 +78,11 @@
     "C:\\Users\\drefr\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+    "C:\\Users\\drefr\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
+    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.13\\microsoft.netcore.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.13\\microsoft.windowsdesktop.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.13\\microsoft.aspnetcore.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.13\\microsoft.netcore.app.host.win-x64.6.0.13.nupkg.sha512"
   ],
   "logs": []
 }
