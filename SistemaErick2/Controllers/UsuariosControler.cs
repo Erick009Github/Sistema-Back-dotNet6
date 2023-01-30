@@ -7,6 +7,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 
 
+
 namespace SistemaErick2.Controllers
 {
     [Route("api/[controller]")]
@@ -32,23 +33,23 @@ namespace SistemaErick2.Controllers
 
             return usuario.Select(u => new Usuario
             { 
-              Idusuario= u.Idusuario,
-              Idrol = u.Idrol,
-              Nombre = u.Nombre,
-              TipoDocumento = u.TipoDocumento,
-              NumDocumento = u.NumDocumento,
-              Direccion = u.Direccion,
-              Telefono = u.Telefono,
-              Email = u.Email,
-              PasswordHash = u.PasswordHash,
-              Condicion = u.Condicion,
-              IdrolNavigation = u.IdrolNavigation
+                Idusuario= u.Idusuario,
+                Idrol = u.Idrol,
+                Nombre = u.Nombre,
+                TipoDocumento = u.TipoDocumento,
+                NumDocumento = u.NumDocumento,
+                Direccion = u.Direccion,
+                Telefono = u.Telefono,
+                Email = u.Email,
+                PasswordHash = u.PasswordHash,
+                Condicion = u.Condicion,
+                IdrolNavigation = u.IdrolNavigation
             });
         }
 
         
         // POST: api/Categorias/Crear
-     
+    
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearUsuario model)
         {
@@ -57,7 +58,7 @@ namespace SistemaErick2.Controllers
                 return BadRequest(ModelState);
             }
 
-             var email = model.Email.ToLower();
+                var email = model.Email.ToLower();
 
             if (await _context.Usuarios.AnyAsync(u => u.Email == email))
             {
@@ -68,16 +69,16 @@ namespace SistemaErick2.Controllers
 
             Usuario usuario = new Usuario
             {
-              Idrol = model.Idrol,
-              Nombre = model.Nombre,
-              TipoDocumento = model.TipoDocumento,
-              NumDocumento = model.NumDocumento,
-              Direccion = model.Direccion,
-              Telefono = model.Telefono,
-              Email = model.Email.ToLower(),
-              PasswordHash = PasswordHash,
-              PasswordSalt = PasswordSalt,
-              Condicion = true
+                Idrol = model.Idrol,
+                Nombre = model.Nombre,
+                TipoDocumento = model.TipoDocumento,
+                NumDocumento = model.NumDocumento,
+                Direccion = model.Direccion,
+                Telefono = model.Telefono,
+                Email = model.Email.ToLower(),
+                PasswordHash = PasswordHash,
+                PasswordSalt = PasswordSalt,
+                Condicion = true
             };
 
             _context.Usuarios.Add(usuario);
@@ -92,7 +93,7 @@ namespace SistemaErick2.Controllers
 
             return Ok();
         }
-           private void CrearPasswordHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
+        private void CrearPasswordHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
@@ -132,13 +133,13 @@ namespace SistemaErick2.Controllers
             usuario.Telefono = model.Telefono;
             usuario.Email = model.Email.ToLower();
 
-              if (model.Act_Password== true)
+                if (model.Act_Password== true)
             {
                 CrearPasswordHash(model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
                 usuario.PasswordHash = PasswordHash;
                 usuario.PasswordSalt = PasswordSalt;
             } 
-             
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -153,7 +154,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Usuarios/Activar/1
-     
+    
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -186,7 +187,7 @@ namespace SistemaErick2.Controllers
         }
 
          // PUT: api/Usuarios/Desactivar/1
-  
+
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
@@ -265,21 +266,16 @@ namespace SistemaErick2.Controllers
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-              _config["Jwt:Issuer"],
-              _config["Jwt:Issuer"],
-              expires: DateTime.Now.AddMinutes(15),
-              signingCredentials: creds,
-              claims: claims);
+                var token = new JwtSecurityToken(
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: creds,
+                claims: claims);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
             
 
         }
-         private bool UsuarioExists(int id)
-        {
-            return _context.Usuarios.Any(e => e.Idusuario == id);
-        }
-         
+        
+        
     }
 }

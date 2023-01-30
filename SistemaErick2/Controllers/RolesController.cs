@@ -5,7 +5,7 @@ using SistemaErick2.Models;
 
 namespace SistemaErick2.Controllers
 {
-  
+
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase
@@ -45,7 +45,7 @@ namespace SistemaErick2.Controllers
             {
                 Idrol = r.Idrol,
                 Nombre = r.Nombre,
-               
+            
             });
 
         }

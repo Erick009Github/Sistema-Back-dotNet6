@@ -22,6 +22,7 @@ namespace SistemaErick2.Controllers
         // GET: api/Categorias/Listar
 
         [HttpGet("[action]")]
+        [Authorize(Roles ="Bodeguero,Administrador")]
         public async Task<IEnumerable<Categorium>> Listar()
         {
             var categoria = await _context.Categoria.ToListAsync();
@@ -39,6 +40,7 @@ namespace SistemaErick2.Controllers
         
         // GET: api/Categorias/Select
         [HttpGet("[action]")]
+        [Authorize(Roles ="Bodeguero,Administrador")]
         public async Task<IEnumerable<SelectCategoria>> Select()
         {
             var categoria = await _context.Categoria.Where(c=>c.Condicion==true).ToListAsync();
@@ -74,6 +76,7 @@ namespace SistemaErick2.Controllers
 
         // PUT: api/Categorias/Actualizar
         [HttpPut("[action]")]
+        [Authorize(Roles ="Bodeguero,Administrador")]
         public async Task<IActionResult> Actualizar([FromBody] Categorium model)
         {
             if (!ModelState.IsValid)
@@ -111,6 +114,7 @@ namespace SistemaErick2.Controllers
 
         // POST: api/Categorias/Crear
         [HttpPost("[action]")]
+        [Authorize(Roles ="Bodeguero,Administrador")]
         public async Task<IActionResult> Crear([FromBody] Categorium model)
         {
             if (!ModelState.IsValid)
@@ -140,6 +144,7 @@ namespace SistemaErick2.Controllers
 
         // DELETE: api/Categorias/Eliminar/1
         [HttpDelete("[action]/{id}")]
+        [Authorize(Roles ="Administrador")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -167,6 +172,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Categorias/Desactivar/1
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
@@ -199,6 +205,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Categorias/Activar/1
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -230,10 +237,7 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-        private bool CategoriasExists(int id)
-        {
-            return _context.Categoria.Any(e => e.Idcategoria == id);
-        }
+        
     }
 }
 

@@ -33,7 +33,7 @@ builder.Services.AddSwaggerGen(options =>{
                     Type = ReferenceType.SecurityScheme
                 }
             },
-           new List<string>() 
+            new List<string>() 
         }
     });
 });
@@ -56,15 +56,12 @@ builder.Services.AddCors(opt =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters()
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
-                        ValidAudience = builder.Configuration.GetSection("Jwt:Issuer").Value,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                     };
                 });
 
@@ -78,8 +75,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(misReglasCors);
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.UseAuthentication();
+
 app.Run();
 

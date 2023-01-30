@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "QXClHwlpffhHByhvw3wcCL3ZiUTUsMCGShhCZlaBpahrokYrpyKH/BsJ9LNqwIWA24hoymqHxC+SAuxUPhZAKQ==",
+  "dgSpecHash": "dCJWHg63qa4MmNC4zE3LfAYSIPR/J1RJV+Dhn3WC4KJMrhXOGUvcHBj2ZEAv7sn8f8x3aB2TeFlb5aC+qg0Zzw==",
   "success": true,
   "projectFilePath": "C:\\Users\\drefr\\Documents\\GitHub\\Sistema-Back-dotNet6\\SistemaErick2\\SistemaErick2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\drefr\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.12\\microsoft.aspnetcore.authentication.jwtbearer.6.0.12.nupkg.sha512",
+    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.2\\microsoft.aspnetcore.authentication.jwtbearer.7.0.2.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
@@ -66,7 +66,6 @@
     "C:\\Users\\drefr\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.runtime.caching\\5.0.0\\system.runtime.caching.5.0.0.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.security.cryptography.cng\\5.0.0\\system.security.cryptography.cng.5.0.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
@@ -78,11 +77,7 @@
     "C:\\Users\\drefr\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\drefr\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.13\\microsoft.netcore.app.ref.6.0.13.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.13\\microsoft.windowsdesktop.app.ref.6.0.13.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.13\\microsoft.aspnetcore.app.ref.6.0.13.nupkg.sha512",
-    "C:\\Users\\drefr\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.13\\microsoft.netcore.app.host.win-x64.6.0.13.nupkg.sha512"
+    "C:\\Users\\drefr\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

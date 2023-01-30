@@ -35,6 +35,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/Listar
+        [Authorize(Roles ="Administrador,Bodeguero")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Articulo>> Listar()
         {
@@ -56,7 +57,6 @@ namespace SistemaErick2.Controllers
 
         }
         // GET: api/Articulos/Mostrar/1
-    
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
@@ -84,6 +84,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/ListarIngreso/texto
+    
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<Articulo>> ListarIngreso([FromRoute] string texto)
         {
@@ -192,7 +193,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Articulos/Editar
-    
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]")]
         public IActionResult Editar([FromBody] Articulo model)
         {
@@ -236,7 +237,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Articulos/Crear
-    
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPost("[action]")]
         public IActionResult Crear([FromBody] Articulo model)
         {
@@ -257,7 +258,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Actualizar
-    
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Articulo model)
         {
@@ -301,7 +302,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Activar/1
-    
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -334,6 +335,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Articulos/Desactivar/1 
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
@@ -366,6 +368,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Articulos/Eliminar/1
+        [Authorize(Roles = "Administrador")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {
