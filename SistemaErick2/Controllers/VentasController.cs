@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
@@ -5,7 +6,7 @@ using SistemaErick2.Models;
 namespace SistemaErick2.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController] 
+    [ApiController]
     public class VentasController : ControllerBase
     {
 
@@ -14,10 +15,11 @@ namespace SistemaErick2.Controllers
         public VentasController(BdsistemaContext context)
         {
             _context = context;
-    
+
         }
-    
+
         // GET: api/Ventas/Listar
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<VentaList>> Listar()
         {
@@ -28,12 +30,13 @@ namespace SistemaErick2.Controllers
                 .Take(100)
                 .ToListAsync();
 
-            return venta.Select(v => new VentaList            {
+            return venta.Select(v => new VentaList
+            {
                 Idventa = v.Idventa,
                 Idcliente = v.Idcliente,
                 IdclienteNavigation = v.IdclienteNavigation,
                 Idusuario = v.Idusuario,
-                IdusuarioNavigation=v.IdusuarioNavigation,
+                IdusuarioNavigation = v.IdusuarioNavigation,
                 TipoComprobante = v.TipoComprobante,
                 SerieComprobante = v.SerieComprobante,
                 NumComprobante = v.NumComprobante,
@@ -45,26 +48,29 @@ namespace SistemaErick2.Controllers
 
         }
 
-          // GET: api/Ventas/VentasMes12
+        // GET: api/Ventas/VentasMes12
+        [Authorize(Roles = "Vendedor,Administrador,Bodeguero")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<ConsultaVentas>> VentasMes12()
         {
             var consulta = await _context.Venta
                 .GroupBy(v => v.FechaHora.Month)
-                .Select(x=> new { Etiqueta=x.Key, Valor =x.Sum(v=>v.Total)})
+                .Select(x => new { Etiqueta = x.Key, Valor = x.Sum(v => v.Total) })
                 .OrderByDescending(x => x.Etiqueta)
                 .Take(12)
                 .ToListAsync();
 
-            return consulta.Select(v => new ConsultaVentas{
-                Etiqueta= v.Etiqueta.ToString(),
+            return consulta.Select(v => new ConsultaVentas
+            {
+                Etiqueta = v.Etiqueta.ToString(),
                 Valor = v.Valor
             });
 
         }
 
 
-         // GET: api/Ventas/ListarFiltro/texto
+        // GET: api/Ventas/ListarFiltro/texto
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<VentaList>> ListarFiltro([FromRoute] string texto)
         {
@@ -77,12 +83,12 @@ namespace SistemaErick2.Controllers
 
             return venta.Select(v => new VentaList
             {
-                
+
                 Idventa = v.Idventa,
                 Idcliente = v.Idcliente,
                 IdclienteNavigation = v.IdclienteNavigation,
                 Idusuario = v.Idusuario,
-                IdusuarioNavigation=v.IdusuarioNavigation,
+                IdusuarioNavigation = v.IdusuarioNavigation,
                 TipoComprobante = v.TipoComprobante,
                 SerieComprobante = v.SerieComprobante,
                 NumComprobante = v.NumComprobante,
@@ -96,24 +102,26 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Ventas/ConsultaFechas
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]/{FechaInicio}/{FechaFin}")]
-        public async Task<IEnumerable<VentaList>> ConsultaFechas([FromRoute]DateTime FechaInicio,DateTime FechaFin)
+        public async Task<IEnumerable<VentaList>> ConsultaFechas([FromRoute] DateTime FechaInicio, DateTime FechaFin)
         {
             var venta = await _context.Venta
                 .Include(v => v.IdusuarioNavigation)
                 .Include(v => v.IdclienteNavigation)
-                .Where(i => i.FechaHora>=FechaInicio)
-                .Where(i => i.FechaHora<=FechaFin) 
+                .Where(i => i.FechaHora >= FechaInicio)
+                .Where(i => i.FechaHora <= FechaFin)
                 .OrderByDescending(v => v.Idventa)
                 .Take(100)
                 .ToListAsync();
 
-            return venta.Select(v => new VentaList{
+            return venta.Select(v => new VentaList
+            {
                 Idventa = v.Idventa,
                 Idcliente = v.Idcliente,
                 IdclienteNavigation = v.IdclienteNavigation,
                 Idusuario = v.Idusuario,
-                IdusuarioNavigation=v.IdusuarioNavigation,
+                IdusuarioNavigation = v.IdusuarioNavigation,
                 TipoComprobante = v.TipoComprobante,
                 SerieComprobante = v.SerieComprobante,
                 NumComprobante = v.NumComprobante,
@@ -126,12 +134,13 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Ventas/ListarDetalles
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]/{Idventa}")]
         public async Task<IEnumerable<DetalleVentum>> ListarDetalles([FromRoute] int Idventa)
         {
             var detalle = await _context.DetalleVenta
                 .Include(a => a.IdarticuloNavigation)
-                .Where(d => d.Idventa==Idventa)
+                .Where(d => d.Idventa == Idventa)
                 .ToListAsync();
 
             return detalle.Select(d => new DetalleVentum
@@ -140,12 +149,13 @@ namespace SistemaErick2.Controllers
                 IdarticuloNavigation = d.IdarticuloNavigation,
                 Cantidad = d.Cantidad,
                 Precio = d.Precio,
-                Descuento=d.Descuento
+                Descuento = d.Descuento
             });
 
         }
 
         // POST: api/Ventas/Crear
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearVenta model)
         {
@@ -155,7 +165,7 @@ namespace SistemaErick2.Controllers
             }
             var fechaHora = DateTime.Now;
 
-            Ventum venta = new ()
+            Ventum venta = new()
             {
                 Idcliente = model.Idcliente,
                 Idusuario = model.Idusuario,
@@ -177,13 +187,13 @@ namespace SistemaErick2.Controllers
                 var id = venta.Idventa;
                 foreach (var det in model.Detalles)
                 {
-                    DetalleVentum detalle = new ()
+                    DetalleVentum detalle = new()
                     {
                         Idventa = id,
                         Idarticulo = det.Idarticulo,
                         Cantidad = det.Cantidad,
                         Precio = det.Precio,
-                        Descuento=det.Descuento
+                        Descuento = det.Descuento
                     };
                     _context.DetalleVenta.Add(detalle);
                 }
@@ -198,6 +208,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Ventas/Anular/1
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Anular([FromRoute] int id)
         {
@@ -230,6 +241,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Ventas/Eliminar/1
+        [Authorize(Roles = "Administrador")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {
@@ -258,6 +270,5 @@ namespace SistemaErick2.Controllers
         }
 
     }
-
 
 }

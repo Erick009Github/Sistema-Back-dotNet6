@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
@@ -18,7 +19,7 @@ namespace SistemaErick2.Controllers
         }
 
           // GET: api/Ingresos/Listar
-        
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Ingreso>> Listar()
         {
@@ -47,6 +48,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Ingresos/ConsultaFechas
+        [Authorize(Roles ="Administrador")]
         [HttpGet("[action]/{FechaInicio}/{FechaFin}")]
         public async Task<IEnumerable<Ingreso>> ConsultaFechas([FromRoute]DateTime FechaInicio,DateTime FechaFin)
         {
@@ -77,6 +79,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Ingresos/ListarDetalles
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpGet("[action]/{idingreso}")]
         public async Task<IEnumerable<DetalleIngreso>> ListarDetalles([FromRoute] int Idingreso)
         {
@@ -96,7 +99,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Ingresos/Crear
-    
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearIngreso model)
         {
@@ -146,7 +149,8 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-         // PUT: api/Ingresos/Anular/1
+        // PUT: api/Ingresos/Anular/1
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Anular([FromRoute] int id)
         {
@@ -181,6 +185,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Ingresos/Eliminar/1
+        [Authorize(Roles ="Administrador")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {

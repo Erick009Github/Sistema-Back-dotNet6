@@ -19,6 +19,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Personas/ListarClientes
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarClientes()
 
@@ -41,7 +42,7 @@ namespace SistemaErick2.Controllers
 
 
         // GET: api/Personas/ListarProveedores
-        //[Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Persona>> ListarProveedores()
 
@@ -62,7 +63,8 @@ namespace SistemaErick2.Controllers
             });
         }
 
-        // GET: api/Personas/SelectProveedores
+        //GET: api/Personas/SelectProveedores
+        [Authorize(Roles = "Bodeguero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectProveedores>> SelectProveedores()
         {
@@ -77,6 +79,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Personas/SelectClientes
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectProveedores>> SelectClientes()
         {
@@ -91,6 +94,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Personas/Crear
+        [Authorize(Roles = "Vendedor,Administrador,Bodeguero")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] Persona model)
         {
@@ -131,6 +135,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Personas/Actualizar
+        [Authorize(Roles = "Vendedor,Administrador,Bodeguero")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Persona model)
         {
@@ -173,6 +178,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Personas/Eliminar/1
+        [Authorize(Roles = "Administrador")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {

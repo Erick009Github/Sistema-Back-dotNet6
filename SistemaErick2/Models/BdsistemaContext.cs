@@ -337,8 +337,6 @@ public partial class BdsistemaContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
-    
-
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
 }

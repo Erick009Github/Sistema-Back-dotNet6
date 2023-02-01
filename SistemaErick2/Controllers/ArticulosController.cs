@@ -57,6 +57,7 @@ namespace SistemaErick2.Controllers
 
         }
         // GET: api/Articulos/Mostrar/1
+        [Authorize(Roles ="Administrador,Bodeguero")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
@@ -84,7 +85,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/ListarIngreso/texto
-    
+        [Authorize(Roles ="Administrador,Bodeguero")]
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<Articulo>> ListarIngreso([FromRoute] string texto)
         {
@@ -109,6 +110,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/ListarVenta/texto
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<Articulo>> ListarVenta([FromRoute] string texto)
         {
@@ -135,6 +137,7 @@ namespace SistemaErick2.Controllers
 
 
          // GET: api/Articulos/BuscarCodigoIngreso/1546845213
+        [Authorize(Roles ="Administrador,Bodeguero")]
         [HttpGet("[action]/{codigo}")]
         public async Task<IActionResult> BuscarCodigoIngreso ([FromRoute] string Codigo)
         {
@@ -163,6 +166,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Articulos/BuscarCodigoVenta/1546845213
+        [Authorize(Roles ="Administrador,Vendedor")]
         [HttpGet("[action]/{codigo}")]
         public async Task<IActionResult> BuscarCodigoVenta ([FromRoute] string Codigo)
         {
@@ -396,6 +400,5 @@ namespace SistemaErick2.Controllers
             return Ok(articulo);
         }
 
-        
     }
 }

@@ -5,8 +5,7 @@ using SistemaErick2.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace SistemaErick2.Controllers
 {
@@ -23,8 +22,8 @@ namespace SistemaErick2.Controllers
             _config = config;
         }
 
-         // GET: api/Usuarios/Listar
-    
+        // GET: api/Usuarios/Listar
+        [Authorize(Roles = "Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Usuario>> Listar()
 
@@ -32,8 +31,8 @@ namespace SistemaErick2.Controllers
             var usuario = await _context.Usuarios.Include(u => u.IdrolNavigation).ToListAsync();
 
             return usuario.Select(u => new Usuario
-            { 
-                Idusuario= u.Idusuario,
+            {
+                Idusuario = u.Idusuario,
                 Idrol = u.Idrol,
                 Nombre = u.Nombre,
                 TipoDocumento = u.TipoDocumento,
@@ -47,9 +46,9 @@ namespace SistemaErick2.Controllers
             });
         }
 
-        
+
         // POST: api/Categorias/Crear
-    
+        [Authorize(Roles = "Administrador")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearUsuario model)
         {
@@ -58,14 +57,14 @@ namespace SistemaErick2.Controllers
                 return BadRequest(ModelState);
             }
 
-                var email = model.Email.ToLower();
+            var email = model.Email.ToLower();
 
             if (await _context.Usuarios.AnyAsync(u => u.Email == email))
             {
                 return BadRequest("El email ya existe");
             }
 
-            CrearPasswordHash(model.Password,out byte[] PasswordHash,out byte[] PasswordSalt);
+            CrearPasswordHash(model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
 
             Usuario usuario = new Usuario
             {
@@ -103,8 +102,8 @@ namespace SistemaErick2.Controllers
 
         }
 
-          // PUT: api/Usuarios/Actualizar
-
+        // PUT: api/Usuarios/Actualizar
+        [Authorize(Roles = "Administrador")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] ActualizarUsuario model)
         {
@@ -133,13 +132,13 @@ namespace SistemaErick2.Controllers
             usuario.Telefono = model.Telefono;
             usuario.Email = model.Email.ToLower();
 
-                if (model.Act_Password== true)
+            if (model.Act_Password == true)
             {
                 CrearPasswordHash(model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
                 usuario.PasswordHash = PasswordHash;
                 usuario.PasswordSalt = PasswordSalt;
-            } 
-            
+            }
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -154,7 +153,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Usuarios/Activar/1
-    
+        [Authorize(Roles = "Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -186,8 +185,8 @@ namespace SistemaErick2.Controllers
             return Ok();
         }
 
-         // PUT: api/Usuarios/Desactivar/1
-
+        // PUT: api/Usuarios/Desactivar/1
+        [Authorize(Roles = "Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
@@ -220,18 +219,18 @@ namespace SistemaErick2.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login (Login model)
+        public async Task<IActionResult> Login(Login model)
         {
             var email = model.Email.ToLower();
 
-            var usuario = await _context.Usuarios.Where(u=>u.Condicion==true).Include(u=>u.IdrolNavigation).FirstOrDefaultAsync(u=>u.Email==email);
+            var usuario = await _context.Usuarios.Where(u => u.Condicion == true).Include(u => u.IdrolNavigation).FirstOrDefaultAsync(u => u.Email == email);
 
             if (usuario == null)
             {
                 return NotFound();
             }
 
-            if (!VerificarPasswordHash(model.Password,usuario.PasswordHash,usuario.PasswordSalt))
+            if (!VerificarPasswordHash(model.Password, usuario.PasswordHash, usuario.PasswordSalt))
             {
                 return NotFound();
             }
@@ -247,7 +246,7 @@ namespace SistemaErick2.Controllers
             };
 
             return Ok(
-                new {token = GenerarToken(claims)}
+                new { token = GenerarToken(claims) }
             );
 
         }
@@ -261,21 +260,19 @@ namespace SistemaErick2.Controllers
             }
         }
 
-        private string GenerarToken(List<Claim>claims)
+        private string GenerarToken(List<Claim> claims)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                var token = new JwtSecurityToken(
-                expires: DateTime.Now.AddMinutes(5),
-                signingCredentials: creds,
-                claims: claims);
+            var token = new JwtSecurityToken(
+            expires: DateTime.Now.AddMinutes(1),
+            signingCredentials: creds,
+            claims: claims);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-            
 
         }
-        
-        
+
     }
 }
