@@ -19,7 +19,7 @@ namespace SistemaErick2.Controllers
         }
 
           // GET: api/Ingresos/Listar
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Ingreso>> Listar()
         {
@@ -48,7 +48,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Ingresos/ConsultaFechas
-        [Authorize(Roles ="Administrador")]
+        [Authorize(Roles ="Administrador,SuperUsuario")]
         [HttpGet("[action]/{FechaInicio}/{FechaFin}")]
         public async Task<IEnumerable<Ingreso>> ConsultaFechas([FromRoute]DateTime FechaInicio,DateTime FechaFin)
         {
@@ -79,7 +79,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Ingresos/ListarDetalles
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpGet("[action]/{idingreso}")]
         public async Task<IEnumerable<DetalleIngreso>> ListarDetalles([FromRoute] int Idingreso)
         {
@@ -99,7 +99,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Ingresos/Crear
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearIngreso model)
         {
@@ -138,6 +138,13 @@ namespace SistemaErick2.Controllers
                         Precio = det.Precio
                     };
                     _context.DetalleIngresos.Add(detalle);
+
+                    var articulo = await _context.Articulos.FindAsync(det.Idarticulo);
+                        if (articulo != null)
+                        {
+                            articulo.CantidadComprada += det.Cantidad;
+                            articulo.Stock += det.Cantidad;
+                        }
                 }
                 await _context.SaveChangesAsync();
             }
@@ -150,7 +157,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Ingresos/Anular/1
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Anular([FromRoute] int id)
         {
@@ -185,7 +192,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Ingresos/Eliminar/1
-        [Authorize(Roles ="Administrador")]
+        [Authorize(Roles ="SuperUsuario")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {

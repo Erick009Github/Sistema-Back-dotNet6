@@ -23,7 +23,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Usuarios/Listar
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,SuperUsuario")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Usuario>> Listar()
 
@@ -48,7 +48,7 @@ namespace SistemaErick2.Controllers
 
 
         // POST: api/Categorias/Crear
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,SuperUsuario")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearUsuario model)
         {
@@ -103,7 +103,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Usuarios/Actualizar
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,SuperUsuario")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] ActualizarUsuario model)
         {
@@ -153,7 +153,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Usuarios/Activar/1
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,SuperUsuario")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -186,7 +186,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Usuarios/Desactivar/1
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,SuperUsuario")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
@@ -266,7 +266,7 @@ namespace SistemaErick2.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-            expires: DateTime.Now.AddMinutes(1),
+            expires: DateTime.Now.AddMinutes(30),
             signingCredentials: creds,
             claims: claims);
 

@@ -6,7 +6,7 @@ using SistemaErick2.Models;
 
 namespace SistemaErick2.Controllers
 {
-    [Authorize(Roles ="Bodeguero,Administrador")]
+    [Authorize(Roles = "Administrador,Bodeguero,SuperUsuario")]
     [Route("api/[controller]")]
     [ApiController] 
     public class CategoriasController : ControllerBase

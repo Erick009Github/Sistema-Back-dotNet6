@@ -15,14 +15,16 @@ public partial class Articulo
     public string? Codigo { get; set; }
 
     public string? Nombre { get; set; } 
-
  
     public int? PrecioVenta { get; set; }
-
 
     public int? Stock { get; set; }
 
     public string? Descripcion { get; set; }
+
+    public int? CantidadVendida { get; set; }
+
+    public int? CantidadComprada { get; set; }
 
     public bool? Condicion { get; set; }
 

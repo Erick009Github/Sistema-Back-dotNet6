@@ -19,7 +19,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Ventas/Listar
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<VentaList>> Listar()
         {
@@ -49,7 +49,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Ventas/VentasMes12
-        [Authorize(Roles = "Vendedor,Administrador,Bodeguero")]
+        [Authorize(Roles = "Vendedor,Administrador,Bodeguero,SuperUsuario")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<ConsultaVentas>> VentasMes12()
         {
@@ -70,7 +70,7 @@ namespace SistemaErick2.Controllers
 
 
         // GET: api/Ventas/ListarFiltro/texto
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<VentaList>> ListarFiltro([FromRoute] string texto)
         {
@@ -102,7 +102,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Ventas/ConsultaFechas
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpGet("[action]/{FechaInicio}/{FechaFin}")]
         public async Task<IEnumerable<VentaList>> ConsultaFechas([FromRoute] DateTime FechaInicio, DateTime FechaFin)
         {
@@ -134,7 +134,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Ventas/ListarDetalles
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpGet("[action]/{Idventa}")]
         public async Task<IEnumerable<DetalleVentum>> ListarDetalles([FromRoute] int Idventa)
         {
@@ -155,7 +155,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Ventas/Crear
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearVenta model)
         {
@@ -178,7 +178,6 @@ namespace SistemaErick2.Controllers
                 Estado = "Aceptado"
             };
 
-
             try
             {
                 _context.Venta.Add(venta);
@@ -196,6 +195,13 @@ namespace SistemaErick2.Controllers
                         Descuento = det.Descuento
                     };
                     _context.DetalleVenta.Add(detalle);
+
+                    var articulo = await _context.Articulos.FindAsync(det.Idarticulo);
+                        if (articulo != null)
+                        {
+                            articulo.CantidadVendida += det.Cantidad;
+                            articulo.Stock -= det.Cantidad;
+                        }
                 }
                 await _context.SaveChangesAsync();
             }
@@ -208,7 +214,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Ventas/Anular/1
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Anular([FromRoute] int id)
         {
@@ -241,7 +247,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Ventas/Eliminar/1
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "SuperUsuario")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {

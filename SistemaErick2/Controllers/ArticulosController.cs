@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaErick2.Models;
 
 namespace SistemaErick2.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ArticulosController : ControllerBase
@@ -35,7 +35,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/Listar
-        [Authorize(Roles ="Administrador,Bodeguero")]
+        [Authorize(Roles ="Administrador,Bodeguero,SuperUsuario")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<Articulo>> Listar()
         {
@@ -49,6 +49,8 @@ namespace SistemaErick2.Controllers
                 Codigo= a.Codigo,
                 Nombre= a.Nombre,
                 Stock= a.Stock,
+                CantidadVendida= a.CantidadVendida,
+                CantidadComprada= a.CantidadComprada,
                 PrecioVenta= a.PrecioVenta,
                 Descripcion= a.Descripcion,
                 Condicion= a.Condicion,
@@ -57,7 +59,7 @@ namespace SistemaErick2.Controllers
 
         }
         // GET: api/Articulos/Mostrar/1
-        [Authorize(Roles ="Administrador,Bodeguero")]
+        [Authorize(Roles ="Administrador,Bodeguero,SuperUsuario")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
@@ -85,7 +87,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/ListarIngreso/texto
-        [Authorize(Roles ="Administrador,Bodeguero")]
+        [Authorize(Roles ="Administrador,Bodeguero,SuperUsuario")]
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<Articulo>> ListarIngreso([FromRoute] string texto)
         {
@@ -110,7 +112,7 @@ namespace SistemaErick2.Controllers
         }
 
         // GET: api/Articulos/ListarVenta/texto
-        [Authorize(Roles = "Vendedor,Administrador")]
+        [Authorize(Roles = "Vendedor,Administrador,SuperUsuario")]
         [HttpGet("[action]/{texto}")]
         public async Task<IEnumerable<Articulo>> ListarVenta([FromRoute] string texto)
         {
@@ -137,7 +139,7 @@ namespace SistemaErick2.Controllers
 
 
          // GET: api/Articulos/BuscarCodigoIngreso/1546845213
-        [Authorize(Roles ="Administrador,Bodeguero")]
+        [Authorize(Roles ="Administrador,Bodeguero,SuperUsuario")]
         [HttpGet("[action]/{codigo}")]
         public async Task<IActionResult> BuscarCodigoIngreso ([FromRoute] string Codigo)
         {
@@ -166,7 +168,7 @@ namespace SistemaErick2.Controllers
         }
 
          // GET: api/Articulos/BuscarCodigoVenta/1546845213
-        [Authorize(Roles ="Administrador,Vendedor")]
+        [Authorize(Roles ="Administrador,Vendedor,SuperUsuario")]
         [HttpGet("[action]/{codigo}")]
         public async Task<IActionResult> BuscarCodigoVenta ([FromRoute] string Codigo)
         {
@@ -197,7 +199,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Articulos/Editar
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPut("[action]")]
         public IActionResult Editar([FromBody] Articulo model)
         {
@@ -241,7 +243,7 @@ namespace SistemaErick2.Controllers
         }
 
         // POST: api/Articulos/Crear
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPost("[action]")]
         public IActionResult Crear([FromBody] Articulo model)
         {
@@ -262,7 +264,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Actualizar
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] Articulo model)
         {
@@ -306,7 +308,7 @@ namespace SistemaErick2.Controllers
 
 
         // PUT: api/Articulos/Activar/1
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
@@ -339,7 +341,7 @@ namespace SistemaErick2.Controllers
         }
 
         // PUT: api/Articulos/Desactivar/1 
-        [Authorize(Roles ="Bodeguero,Administrador")]
+        [Authorize(Roles ="Bodeguero,Administrador,SuperUsuario")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
@@ -372,7 +374,7 @@ namespace SistemaErick2.Controllers
         }
 
         // DELETE: api/Articulos/Eliminar/1
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "SuperUsuario")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {

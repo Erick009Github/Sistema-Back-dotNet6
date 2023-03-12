@@ -71,6 +71,13 @@ public partial class BdsistemaContext : DbContext
                 .HasColumnName("nombre");
             entity.Property(e => e.PrecioVenta).HasColumnName("precio_venta");
             entity.Property(e => e.Stock).HasColumnName("stock");
+            entity.Property(e => e.CantidadVendida)
+                .HasColumnName("cantidad_vendida")
+                .HasDefaultValue(0);
+
+            entity.Property(e => e.CantidadComprada)
+                .HasColumnName("cantidad_comprada")
+                .HasDefaultValue(0);
 
             entity.HasOne(d => d.IdcategoriaNavigation).WithMany(p => p.Articulos)
                 .HasForeignKey(d => d.Idcategoria)

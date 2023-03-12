@@ -5,7 +5,7 @@ using SistemaErick2.Models;
 
 namespace SistemaErick2.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,SuperUsuario")]
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase
