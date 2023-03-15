@@ -49,8 +49,6 @@ namespace SistemaErick2.Controllers
                 Codigo= a.Codigo,
                 Nombre= a.Nombre,
                 Stock= a.Stock,
-                CantidadVendida= a.CantidadVendida,
-                CantidadComprada= a.CantidadComprada,
                 PrecioVenta= a.PrecioVenta,
                 Descripcion= a.Descripcion,
                 Condicion= a.Condicion,
